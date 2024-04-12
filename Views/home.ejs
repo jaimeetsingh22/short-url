@@ -1,0 +1,175 @@
+<!-- yaha hum wo html ke codes likhenge jo hume render karwana hai -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <style>
+      *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1{
+    margin: 2rem 0;
+    text-align: center;
+    color: #3c74b2;
+}
+
+.form{
+  max-width: 1200px;
+  width: 80%;
+   height: auto;
+    padding: 2rem;
+    margin:  2rem auto;
+    /* border: 2px solid black; */
+    text-align: center;
+}
+
+label{
+  display: block;
+  font-weight: 500;
+  font-size: 2rem;
+}
+
+.form  input[type="text"]{
+  display: block;
+  width: 80%;
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 1rem auto;
+  /* margin-bottom: 1rem; */
+  border: 2px solid grey;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.form input[type="text"]:focus{
+  border: 3px solid #3c74b2;
+}
+
+.btn1 .btn{
+  padding: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  /* color: white; */
+  border: 2px solid black;
+  transition: all .3s  ease;
+  outline: none;
+  width: auto;
+}
+.btn:hover {
+    background-color: black;
+    color: white;
+    box-shadow: 0 0 10px black;
+  }
+  .btn:active{
+    transform: scale(.9);
+  }
+
+  .box{
+    width: 60%;
+    margin: auto;
+    display: flex;  
+    justify-content: center;
+  }
+
+table{
+  text-align: center;
+}
+
+h3{
+  text-align: center;
+    color:blue;
+    margin: 1.5rem 0;
+}
+
+.homeBtn{
+  text-decoration: none;
+  border: 2px solid black;
+  padding: 8px 12px;
+  border-radius: 10px;
+  width: auto;
+  display: block;
+  margin: 1.5rem 0;
+  transition: all 0.3s ease;
+}
+
+.homeBtn:hover{
+  background-color: black;
+    color: white;
+    box-shadow: 0 0 10px black;
+}
+
+    </style>
+  </head>
+  <body>
+    <h1>URL Shortener App</h1>
+    <div class="form">
+      <!-- yaha action ka matlab hota hai ki kiss route me data send karna hai -->
+      <form action="/url" method="POST">
+        <label for="url">
+          <!-- hum name ke under jo bhi pass karenge wo database usi naam se jayega basically aise kaam karega
+            {
+                url:http//example.com
+            } -->
+            Enter URL
+          <input
+            type="text"
+            id="url"
+            name="url"
+            placeholder="http://example.com"
+          />
+        </label>
+        <div class="btn1">
+          <button class="btn" type="submit">Generate</button>
+        </div>
+      </form>
+
+      <!-- yaha locals ka matlab hai ki hum jo res.render me extra data jo bhejte hai wo yaha se destructure karke use kar sakte hai -->
+      <% if (locals.id) { %>
+      <h3>Your URL Generated below</h3>
+      <span>Click to Visit: </span
+      ><a href="http://localhost:3000/url/<%= id %>" target="_blank"
+        >http://localhost:3000/url/<%= id %></a
+      >
+
+      <a href="http://localhost:3000/" class="homeBtn">Go To Home</a>
+      <% } %>
+    </div>
+  </body>
+    </div>
+    <% if (locals.urls) { %>
+      <div class="box">
+        <table border="2">
+        <thead>
+        <th>S no.</th>
+        <th>ShortID</th>
+        <th>Short URL</th>
+        <th>Redirect URL</th>
+        <th>Total Clicks</th>
+      </thead>
+      <tbody>
+        <% urls.forEach((url,index) => { %>
+        <tr>
+          <td><%= index + 1%></td>
+          <td><%= url.shortId %></td>
+          <td><a href="http://localhost:3000/url/<%=url.shortId%>" target="_blank">http://localhost:3000/url/<%=url.shortId%></a></td>
+          <td><%= url.redirectUrl %></td>
+          <td><%= url.visitHistory.length %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+    <% } %>
+  </body>
+</html>

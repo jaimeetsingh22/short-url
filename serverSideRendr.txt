@@ -1,0 +1,11 @@
+In this project i will do a server side rendering 
+
+now what is server side rendering ?
+
+Server-side rendering (SSR) is the process by which web applications generate HTML on the server and send it to the client's browser
+
+and i will implement using EJS  as view engine in Node.js with Express framework .
+
+EJS means  Embedded JavaScript and it's a template language for generating HTML markup with included embedded JavaScript code. 
+
+now lets see..!!
